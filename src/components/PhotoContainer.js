@@ -3,8 +3,13 @@ import Photos from './Photos';
 import NotFound from './NotFound';
 
 const PhotoContainer = (props) => {     
+   
+    const loading = props.loading;
 
     const results = props.data;
+
+    console.log(loading);
+
     let photos;
     if(results.length > 0) {
         photos = results.map(photo => 
@@ -17,13 +22,17 @@ const PhotoContainer = (props) => {
     return (
      <div className="photo-container">
         { (results.length > 0)
-          ?  <h2> {props.title} </h2>
-          :  <h2></h2>
+          ?   <h2> {props.title} </h2>
+          :  <span> {/*  empty */} </span>
         }
       
-         <ul>
-           {photos}
-         </ul>
+         
+        { 
+          loading 
+          ? <p>Loading...</p>
+          : <ul> {photos} </ul> 
+        }
+        
      </div>
     );
 }
